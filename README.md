@@ -16,9 +16,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/lukinairina90/in_memory_cache/cache"
 	"log"
 	"time"
+
+	"github.com/lukinairina90/in_memory_cache/cache"
 )
 
 func main() {
