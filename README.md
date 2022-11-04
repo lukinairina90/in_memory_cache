@@ -12,42 +12,60 @@ Package `generic_cache` contains in memory cache implementation using golang par
 ### `cache` package example:
 
 ```go
+package main
+
 import (
 	"fmt"
-	
 	"github.com/lukinairina90/in_memory_cache/cache"
+	"log"
+	"time"
 )
 
 func main() {
 	mc := cache.New()
-	mc.Set("user-id", 42)
-	uID := mc.Get("user-id")
-	fmt.Println(uID)
-	
-	mc.Delete("user-id")
-	uID = mc.Get("user-id")
-	fmt.Println(uID)
+	if err := mc.Set("userId", 42, time.Second*5); err != nil {
+		log.Fatal(err)
+	}
+
+	time.Sleep(time.Second * 3)
+
+	m, err := mc.Get("userId")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(m)
 }
+
 ```
 
 ---
 ### `generic_cache` package example:
 
 ```go
+package main
+
 import (
 	"fmt"
-	
+	"log"
+	"time"
+
 	"github.com/lukinairina90/in_memory_cache/generic_cache"
+
 )
 
 func main() {
-	mc := generic_cache.New[string, int]() // pass parameter types for your generic cache object. 
-	mc.Set("user-id", 42)
-	uID := mc.Get("user-id")
-	fmt.Println(uID)
+	mc := generic_cache.New[string, int]()
+	if err := mc.Set("userId", 42, time.Second*5); err != nil {
+		log.Fatal(err)
+	}
 
-	mc.Delete("user-id")
-	uID = mc.Get("user-id")
-	fmt.Println(uID)
+	time.Sleep(time.Second * 3)
+
+	m, err := mc.Get("userId")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(m)
 }
+
 ```
