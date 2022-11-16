@@ -11,6 +11,9 @@ Package `generic_cache` contains in memory cache implementation using golang par
 
 ### `cache` package example:
 
+#### When calling the Set(key string, value interface{}, ttl time.Duration) method,
+#### an additional argument is passed for a ttl of the time.Duration type, after which the value will be cleared from the cache.
+
 ```go
 package main
 
@@ -41,6 +44,9 @@ func main() {
 
 ---
 ### `generic_cache` package example:
+
+#### When calling the Set(key comparable, value any, ttl time.Duration) method,
+#### an additional argument is passed for a ttl of the time.Duration type, after which the value will be cleared from the cache.
 
 ```go
 package main

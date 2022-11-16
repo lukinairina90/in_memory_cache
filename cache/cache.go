@@ -49,10 +49,6 @@ func (c *Cache) Get(key string) (interface{}, error) {
 }
 
 func (c *Cache) Delete(key string) error {
-	return c.delete(key)
-}
-
-func (c *Cache) delete(key string) error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
@@ -71,7 +67,7 @@ func (c *Cache) runTTLHandler() {
 		for range t.C {
 			for key, val := range c.m {
 				if val.setTime.Add(val.ttl).Before(time.Now()) {
-					if err := c.delete(key); err != nil {
+					if err := c.Delete(key); err != nil {
 						fmt.Printf("error deleting key [%s] with error: %s\n", key, err)
 					}
 				}
